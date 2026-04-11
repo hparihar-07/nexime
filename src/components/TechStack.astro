@@ -1,0 +1,75 @@
+---
+const techStack = [
+  "React Native", "Expo", "Zustand", "AniList API", "TypeScript", "InstantDB", "Node.js"
+];
+
+const techStackReverse = [...techStack].reverse();
+
+const marqueeItems = [...techStack, ...techStack, ...techStack, ...techStack];
+const marqueeItemsReverse = [...techStackReverse, ...techStackReverse, ...techStackReverse, ...techStackReverse];
+---
+
+<section id="tech" class="relative py-32 overflow-hidden w-full bg-black border-y border-white/5">
+  
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-4xl h-40 bg-orange-600/10 blur-[120px] rounded-[100%] pointer-events-none z-0"></div>
+
+  <div class="container mx-auto px-6 text-center mb-20 relative z-10">
+    <h2 class="text-4xl md:text-5xl font-semibold font-heading tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white to-neutral-500 mb-4">
+      Built on the bleeding edge.
+    </h2>
+    <p class="text-lg text-neutral-400 font-medium">Powering a seamless, unbounded experience.</p>
+  </div>
+
+  <div 
+    class="w-full relative z-10 flex flex-col gap-6" 
+    style="mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);"
+  >
+    
+    <div class="flex overflow-hidden group">
+      <div class="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+        {marqueeItems.map((tech) => (
+          <div class="mx-3 md:mx-4 px-8 py-4 bg-white/2 backdrop-blur-xl ring-1 ring-white/10 rounded-full text-neutral-400 font-medium tracking-wide hover:text-orange-400 hover:bg-orange-500/10 hover:ring-orange-500/40 hover:shadow-[0_0_40px_rgba(249,115,22,0.3)] transition-all duration-500 cursor-default shrink-0">
+            {tech}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex overflow-hidden group">
+      <div class="flex w-max animate-marquee-reverse group-hover:[animation-play-state:paused] -ml-[50%]">
+        {marqueeItemsReverse.map((tech) => (
+          <div class="mx-3 md:mx-4 px-8 py-4 bg-white/2 backdrop-blur-xl ring-1 ring-white/10 rounded-full text-neutral-400 font-medium tracking-wide hover:text-orange-400 hover:bg-orange-500/10 hover:ring-orange-500/40 hover:shadow-[0_0_40px_rgba(249,115,22,0.3)] transition-all duration-500 cursor-default shrink-0">
+            {tech}
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  
+  .animate-marquee-reverse {
+    animation: marquee-reverse 40s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); } 
+  }
+
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+  }
+
+  @media (max-width: 768px) {
+    .animate-marquee, .animate-marquee-reverse {
+      animation-duration: 25s;
+    }
+  }
+</style>

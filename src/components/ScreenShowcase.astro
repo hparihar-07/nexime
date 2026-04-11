@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import discoverImg from "../assets/discover.jpg";
+import homeImg from "../assets/home.jpg";
+import watchlistImg from "../assets/watchlist.jpg";
+import profileImg from "../assets/profile.jpg";
+
+const features = [
+  {
+    title: "Cinematic Hub",
+    desc: "Dynamic adaptive theming listens to your system preferences, rendering a sleek interface without static color hardcoding.",
+    span: "md:col-span-2 md:row-span-2",
+    layout: "vertical",
+    phoneWidth: "w-[200px] md:w-[280px]", 
+    img: homeImg,
+  },
+  {
+    title: "Optimized Search",
+    desc: "Live catalog searching featuring a custom useDebounce hook to protect API rate limits.",
+    span: "md:col-span-1 md:row-span-1",
+    layout: "vertical",
+    phoneWidth: "w-[160px] md:w-[200px]", 
+    img: discoverImg,
+  },
+  {
+    title: "Real-Time Watchlist",
+    desc: "Syncs instantly across devices with zero loading spinners via optimistic UI updates.",
+    span: "md:col-span-1 md:row-span-1",
+    layout: "vertical",
+    phoneWidth: "w-[160px] md:w-[200px]",
+    img: watchlistImg
+  },
+  {
+    title: "Taste Profiling",
+    desc: "A multi-step onboarding engine that saves your favorite genres and securely pushes them to a global Zustand store.",
+    span: "md:col-span-3", 
+    layout: "horizontal",
+    phoneWidth: "w-[200px] md:w-[260px]",
+    img: profileImg
+  }
+];
+---
+
+<section id="screens" class="py-32 relative">
+  <div class="container mx-auto px-6 max-w-6xl">
+    
+    <div class="mb-20 text-center">
+      <h2 class="text-4xl md:text-5xl font-semibold  font-heading tracking-tighter mb-4">Designed for the details.</h2>
+      <p class="text-neutral-400 text-lg">Every screen crafted to highlight the art you love.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto">
+      {features.map((feat) => (
+        <div class={`
+          ${feat.span} 
+          group relative overflow-hidden rounded-4xl
+          bg-linear-to-b from-white/5 to-white/2 
+          ring-1 ring-white/10 shadow-2xl
+          p-8 md:p-10 flex 
+          ${feat.layout === 'horizontal' ? 'flex-col md:flex-row items-center gap-12' : 'flex-col'}
+          transition-transform duration-500 hover:scale-[1.02]
+        `}>
+          
+          <div class={`relative z-10 ${feat.layout === 'horizontal' ? 'w-full md:w-1/2' : 'w-full'}`}>
+            <h3 class="text-2xl font-semibold text-white mb-2">{feat.title}</h3>
+            <p class="text-neutral-400 font-medium">{feat.desc}</p>
+          </div>
+          
+          <div class={`relative z-10 rounded-xl overflow-hidden bg-linear-to-tr from-neutral-900 to-neutral-800 ring-1 ring-white/5 transform group-hover:-translate-y-2 transition-transform duration-700 ease-out
+            ${feat.layout === 'horizontal' ? 'w-full md:w-1/2 h-64 md:h-80 mt-8 md:mt-0' : 'w-full flex-1 min-h-62.5 mt-8'}
+          `}>
+            
+            <div class={`absolute top-8 left-1/2 -translate-x-1/2 ${feat.phoneWidth} aspect-597/1280 rounded-4xl md:rounded-[2.5rem] ring-4 md:ring-[6px] ring-slate-300 border-[3px] md:border-[5px] border-black bg-black shadow-[0_-10px_40px_rgba(0,0,0,0.6)] overflow-hidden`}>
+
+              <Image 
+                src={feat.img} 
+                alt={`${feat.title} Screen`} 
+                class="absolute inset-0 w-full h-full object-cover object-top z-10" 
+              />
+
+            </div>
+
+          </div>
+
+          <div class="absolute inset-0 bg-linear-to-b from-orange-500/0 via-orange-500/0 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
